@@ -1,0 +1,13 @@
+{% ckan_extends %}
+{% block resource_actions_inner %}
+            {% if h.check_access('package_update', {'id':pkg.id }) and not is_activity_archive %}
+              <li>{% link_for _('Manage'), named_route='resource.edit', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='wrench' %}</li>
+            {% endif %}
+            {% if res.datastore_active %}
+              <li>
+                <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ app_globals.site_url }}/datastore/dump/{{res.id}}">
+                    <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }}
+                </a>
+              </li>
+            {% endif %}
+{% endblock %}
